@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  GeniusQR
 //
-//  Created by Matheus  Torres on 09/10/24.
+//  Created by Matheus  Torres on 26/09/24.
 //
 
 import UIKit
