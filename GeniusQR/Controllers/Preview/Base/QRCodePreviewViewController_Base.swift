@@ -74,3 +74,5 @@ class QRCodePreviewViewController: UIViewController {
         present(activityViewController, animated: true, completion: nil)
     }
 }
+
+

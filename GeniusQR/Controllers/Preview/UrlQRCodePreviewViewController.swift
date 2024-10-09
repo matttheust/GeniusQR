@@ -17,6 +17,7 @@ class UrlQRCodePreviewViewController: QRCodePreviewViewController {
         self.cardTitle = title
         self.url = url
         self.qrCodeType = .website
+        
     }
     
     override func viewDidLoad() {
