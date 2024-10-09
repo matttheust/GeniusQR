@@ -133,7 +133,7 @@ class GenerateViewController: UIViewController {
             case .sms:
                 presentationVC = SmsQRCodeViewController()
             case .vcard:
-                presentationVC = VcardQRCodeViewController()
+                presentationVC = VCardQRCodeViewController()
             case .wifi:
                 presentationVC = WifiQRCodeViewController()
             }
