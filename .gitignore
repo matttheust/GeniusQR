@@ -1,0 +1,10 @@
+# Ignore arquivos de sistema
+.DS_Store
+
+# Ignore pastas de dependências
+node_modules/
+/Pods/
+
+# Ignore arquivos de configuração locais
+*.xcuserdata
+*.xcuserstate
