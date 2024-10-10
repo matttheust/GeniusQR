@@ -11,7 +11,7 @@ class QRCodePreviewCard: UIView {
     
     private let backgroundImageView = UIImageView()
     private let titleLabel = UILabel()
-    let qrCodeImageView = UIImageView()
+    public let qrCodeImageView = UIImageView()
     private let qrCodeTypeIconImageView = UIImageView()
 
     override init(frame: CGRect) {
@@ -19,34 +19,43 @@ class QRCodePreviewCard: UIView {
         setupUI()
     }
     
+    // Este inicializador é necessário para suportar a inicialização a partir de Storyboards ou XIBs.
+    // Ele deve ser implementado para que a view possa ser instanciada corretamente quando carregada dessa forma.
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupUI()
+        setupUI() 
     }
     
     private func setupUI() {
-        // Configure a imagem de fundo
+        setupAppearance()
+        setupLayout()
+    }
+    
+    private func setupAppearance() {
+        // Configura a imagem de fundo do meu asset "cardBackground"
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         backgroundImageView.image = UIImage(named: "cardBackground")
         backgroundImageView.contentMode = .scaleAspectFill
         addSubview(backgroundImageView)
         
-        // Configure o titleLabel
+        // Configura o titleLabel que virá de cada tipo de QR Code
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = .systemFont(ofSize: 36, weight: .bold)
-        titleLabel.textColor = .white // Cor do texto
+        titleLabel.textColor = .white
         addSubview(titleLabel)
         
-        // Configure o qrCodeImageView
+        // Configura o QR Code em si
         qrCodeImageView.translatesAutoresizingMaskIntoConstraints = false
+        qrCodeImageView.contentMode = .scaleAspectFit
         addSubview(qrCodeImageView)
         
-        // Configure o qrCodeTypeIconImageView
+        // Configura o icone do tipo do QR Code
         qrCodeTypeIconImageView.translatesAutoresizingMaskIntoConstraints = false
-        qrCodeTypeIconImageView.tintColor = .white // Definindo a cor do ícone como branca
+        qrCodeTypeIconImageView.tintColor = .white
         addSubview(qrCodeTypeIconImageView)
-
-        // Constraints
+    }
+    
+    private func setupLayout() {
         NSLayoutConstraint.activate([
             // Background ImageView
             backgroundImageView.topAnchor.constraint(equalTo: topAnchor),
@@ -54,12 +63,12 @@ class QRCodePreviewCard: UIView {
             backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            // Title Label Constraints
+            // Label do título Constraints
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
-            // QR Code Image View Constraints
+            // Imagem do QR Code Constraints
             qrCodeImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             qrCodeImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 30),
             qrCodeImageView.widthAnchor.constraint(equalToConstant: 200),
