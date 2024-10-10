@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LinkQRCodeViewController: UIViewController {
+class LinkQRCodeController: UIViewController {
     
     // MARK: - UI Elements
     private let titleLabel = UILabel()

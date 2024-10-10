@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VCardQRCodePreviewViewController: QRCodePreviewViewController {
+class VCardQRCodePreviewController: QRCodePreviewController {
 
     private var vCardData: String?
     private var vCardTitle: String?

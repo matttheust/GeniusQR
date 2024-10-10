@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol QrCodeTypeProtocol {
+protocol QRCodeTypeProtocol {
     var title: String { get }
     var icon: UIImage? { get }
 }

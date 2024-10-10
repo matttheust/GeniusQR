@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SmsQRCodeViewController: UIViewController {
+class SmsQRCodeController: UIViewController {
 
     private let stackView = UIStackView()
     private let phoneNumberTextField = UITextField()
@@ -79,7 +79,7 @@ class SmsQRCodeViewController: UIViewController {
               let message = messageTextField.text, !message.isEmpty else { return }
         
         let smsData = "sms:\(phoneNumber)&body=\(message)"
-        let previewVC = SmsQRCodePreviewViewController()
+        let previewVC = SmsQRCodePreviewController()
         previewVC.configure(with: smsData)
         
         navigationController?.pushViewController(previewVC, animated: true)
@@ -91,7 +91,7 @@ class SmsQRCodeViewController: UIViewController {
 }
 
 // MARK: - UITextFieldDelegate
-extension SmsQRCodeViewController: UITextFieldDelegate {
+extension SmsQRCodeController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // Atualiza o botão "Adicionar" com base no texto
         let currentText = textField.text ?? ""

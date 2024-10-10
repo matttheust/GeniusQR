@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SmsQRCodePreviewViewController: QRCodePreviewViewController {
+class SmsQRCodePreviewController: QRCodePreviewController {
     
     // Variável para armazenar os dados do SMS
     private var smsData: String?
