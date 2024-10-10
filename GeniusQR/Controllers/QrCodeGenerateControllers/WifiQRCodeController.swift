@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WifiQRCodeViewController: UIViewController {
+class WifiQRCodeController: UIViewController {
     
     // MARK: - Properties
     private let stackView = UIStackView()
@@ -151,7 +151,7 @@ class WifiQRCodeViewController: UIViewController {
         guard let ssid = ssidTextField.text, !ssid.isEmpty else { return }
         let password = passwordTextField.text ?? ""
         
-        let previewVC = WifiQRCodePreviewViewController()
+        let previewVC = WifiQRCodePreviewController()
         previewVC.configure(ssid: ssid,
                            securityType: selectedEncryption,
                            password: password)
@@ -165,7 +165,7 @@ class WifiQRCodeViewController: UIViewController {
 }
 
 // MARK: - UITextFieldDelegate
-extension WifiQRCodeViewController: UITextFieldDelegate {
+extension WifiQRCodeController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // Habilita o botão Adicionar apenas se o SSID não estiver vazio
         let updatedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string

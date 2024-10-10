@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VCardQRCodeViewController: UIViewController, UITextFieldDelegate {
+class VCardQRCodeController: UIViewController, UITextFieldDelegate {
 
     // MARK: - UI Elements
     private let scrollView = UIScrollView() // Adiciona um scrollView
@@ -139,7 +139,7 @@ class VCardQRCodeViewController: UIViewController, UITextFieldDelegate {
         // Pega o nome e sobrenome para o título
         let fullName = "\(firstNameTextField.text ?? "") \(lastNameTextField.text ?? "")"
         
-        let previewVC = VCardQRCodePreviewViewController()
+        let previewVC = VCardQRCodePreviewController()
         previewVC.configure(with: vCardString, title: fullName) // Passa o título junto com a string vCard
         navigationController?.pushViewController(previewVC, animated: true)
     }

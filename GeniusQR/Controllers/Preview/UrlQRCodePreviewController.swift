@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UrlQRCodePreviewViewController: QRCodePreviewViewController {
+class UrlQRCodePreviewController: QRCodePreviewController {
     
     // Variável para armazenar a URL
     private var url: String?

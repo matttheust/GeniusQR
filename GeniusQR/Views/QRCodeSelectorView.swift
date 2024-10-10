@@ -7,9 +7,9 @@
 
 import UIKit
 
-class CardView: UIView {
+class QRCodeSelectorView: UIView {
     
-    var qrCodeType: StaticQrCodeType? // Propriedade para armazenar o tipo de QR code
+    var qrCodeType: StaticQRCodeType? // Propriedade para armazenar o tipo de QR code
 
     private let titleLabel = UILabel()
     private let iconImageView = UIImageView()

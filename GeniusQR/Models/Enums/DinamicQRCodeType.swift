@@ -6,7 +6,7 @@
 //
 import UIKit
 
-enum DynamicQrCodeType: CaseIterable, QrCodeTypeProtocol {
+enum DynamicQRCodeType: CaseIterable, QRCodeTypeProtocol {
     case links
     case email
     

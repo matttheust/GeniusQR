@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WifiQRCodePreviewViewController: QRCodePreviewViewController {
+class WifiQRCodePreviewController: QRCodePreviewController {
     
     // Configura o preview com as informações da rede WiFi
     func configure(ssid: String, securityType: String, password: String?) {

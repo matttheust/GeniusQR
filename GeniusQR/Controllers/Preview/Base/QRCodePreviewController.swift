@@ -1,5 +1,5 @@
 //
-//  QRCodePreviewViewController.swift
+//  QRCodePreviewController.swift
 //  GeniusQR
 //
 //  Created by Matheus  Torres on 30/09/24.
@@ -8,13 +8,13 @@
 import UIKit
 import CoreImage.CIFilterBuiltins
 
-class QRCodePreviewViewController: UIViewController {
+class QRCodePreviewController: UIViewController {
     
-    public let qrCodeCardView = QRCodeCardView()
+    public let qrCodeCardView = QRCodePreviewCard()
     
     var qrCodeText: String?
     var cardTitle: String?
-    var qrCodeType: StaticQrCodeType?
+    var qrCodeType: StaticQRCodeType?
 
     override func viewDidLoad() {
         super.viewDidLoad()

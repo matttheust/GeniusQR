@@ -24,15 +24,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func createRoot() -> UIViewController {
         
         //Controllers
-        let generateController = GenerateViewController()
+        let generateController = GenerateController()
         generateController.tabBarItem.title = "Generate"
         generateController.tabBarItem.image = UIImage(systemName: "qrcode")
         
-        let historyController = HistoryViewController()
+        let historyController = HistoryController()
         historyController.tabBarItem.title = "History"
         historyController.tabBarItem.image = UIImage(systemName: "clock")
         
-        let settingsController = SettingsViewController()
+        let settingsController = SettingsController()
         settingsController.tabBarItem.title = "Settings"
         settingsController.tabBarItem.image = UIImage(systemName: "gear")
         
