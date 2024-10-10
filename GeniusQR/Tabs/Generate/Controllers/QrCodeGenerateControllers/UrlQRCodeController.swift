@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UrlQRCodeViewController: UIViewController {
+class UrlQRCodeController: UIViewController {
     
     private let stackView = UIStackView()
     private let titleTextField = UITextField() // Campo de título
@@ -86,7 +86,7 @@ class UrlQRCodeViewController: UIViewController {
             return
         }
         
-        let previewVC = UrlQRCodePreviewViewController()
+        let previewVC = UrlQRCodePreviewController()
         previewVC.configure(with: titleTextField.text ?? "", url: url)
         
         navigationController?.pushViewController(previewVC, animated: true)
@@ -104,7 +104,7 @@ class UrlQRCodeViewController: UIViewController {
 }
 
 // MARK: - UITextFieldDelegate
-extension UrlQRCodeViewController: UITextFieldDelegate {
+extension UrlQRCodeController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // Atualiza o botão "Adicionar" com base no texto
         let currentText = textField.text ?? ""

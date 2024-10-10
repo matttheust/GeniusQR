@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TextQRCodeViewController: UIViewController {
+class TextQRCodeController: UIViewController {
 
     private let stackView = UIStackView()
     private let textField = UITextField()
@@ -68,7 +68,7 @@ class TextQRCodeViewController: UIViewController {
     @objc private func addButtonTapped() {
         guard let text = textField.text, !text.isEmpty else { return }
         
-        let previewVC = TextQRCodePreviewViewController()
+        let previewVC = TextQRCodePreviewController()
         previewVC.configure(with: text)
         
         navigationController?.pushViewController(previewVC, animated: true)
@@ -80,7 +80,7 @@ class TextQRCodeViewController: UIViewController {
 }
 
 // MARK: - UITextFieldDelegate
-extension TextQRCodeViewController: UITextFieldDelegate {
+extension TextQRCodeController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // Atualiza o botão "Adicionar" com base no texto
         let currentText = textField.text ?? ""

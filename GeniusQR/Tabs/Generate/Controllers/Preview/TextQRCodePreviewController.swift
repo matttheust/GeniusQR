@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TextQRCodePreviewViewController: QRCodePreviewViewController {
+class TextQRCodePreviewController: QRCodePreviewController {
     
     func configure(with text: String) {
         self.qrCodeText = text

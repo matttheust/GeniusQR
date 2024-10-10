@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GenerateViewController: UIViewController {
+class GenerateController: UIViewController {
     
     // MARK: - CONFIGS DA TELA
     let scrollView = UIScrollView()
@@ -55,12 +55,12 @@ class GenerateViewController: UIViewController {
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
         
-        createSection(title: "Estáticos", qrTypes: StaticQrCodeType.allCases)
-        createSection(title: "Dinâmicos", qrTypes: DynamicQrCodeType.allCases, isDynamic: true)
+        createSection(title: "Estáticos", qrTypes: StaticQRCodeType.allCases)
+        createSection(title: "Dinâmicos", qrTypes: DynamicQRCodeType.allCases, isDynamic: true)
     }
     
     // MARK: - SECTION CREATION
-    func createSection<T>(title: String, qrTypes: [T], isDynamic: Bool = false) where T: QrCodeTypeProtocol {
+    func createSection<T>(title: String, qrTypes: [T], isDynamic: Bool = false) where T: QRCodeTypeProtocol {
         let sectionLabel = UILabel()
         sectionLabel.text = title
         sectionLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -83,9 +83,9 @@ class GenerateViewController: UIViewController {
                 horizontalStack.addArrangedSubview(rowStack!)
             }
             
-            let card = CardView()
+            let card = QRCodeSelectorView()
             card.configure(withTitle: qrType.title, icon: qrType.icon)
-            card.qrCodeType = qrType as? StaticQrCodeType
+            card.qrCodeType = qrType as? StaticQRCodeType
             
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cardTapped(_:)))
             card.addGestureRecognizer(tapGesture)
@@ -110,7 +110,7 @@ class GenerateViewController: UIViewController {
     
     // MARK: - ACTIONS
     @objc func cardTapped(_ sender: UITapGestureRecognizer) {
-        guard let card = sender.view as? CardView,
+        guard let card = sender.view as? QRCodeSelectorView,
               let qrType = card.qrCodeType else { return } // Obtenha o tipo do card
         
         // Feedback visual ao tocar
@@ -127,15 +127,15 @@ class GenerateViewController: UIViewController {
             
             switch qrType {
             case .text:
-                presentationVC = TextQRCodeViewController()
+                presentationVC = TextQRCodeController()
             case .website:
-                presentationVC = UrlQRCodeViewController()
+                presentationVC = UrlQRCodeController()
             case .sms:
-                presentationVC = SmsQRCodeViewController()
+                presentationVC = SmsQRCodeController()
             case .vcard:
-                presentationVC = VCardQRCodeViewController()
+                presentationVC = VCardQRCodeController()
             case .wifi:
-                presentationVC = WifiQRCodeViewController()
+                presentationVC = WifiQRCodeController()
             }
             
             // Configurando a apresentação do view controller

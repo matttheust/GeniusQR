@@ -1,15 +1,15 @@
 //
-//  CardView.swift
+//  QRCodeSelectorView.swift
 //  GeniusQR
 //
-//  Created by Matheus  Torres on 27/09/24.
+//  Created by Matheus Torres on 27/09/24.
 //
 
 import UIKit
 
-class CardView: UIView {
+class QRCodeSelectorView: UIView {
     
-    var qrCodeType: StaticQrCodeType? // Propriedade para armazenar o tipo de QR code
+    var qrCodeType: StaticQRCodeType?
 
     private let titleLabel = UILabel()
     private let iconImageView = UIImageView()
@@ -24,17 +24,24 @@ class CardView: UIView {
     }
 
     private func setupCard() {
+        setupAppearance()
+        setupLayout()
+    }
+    
+    private func setupAppearance() {
+        // Definindo as cores e bordas do card
+        backgroundColor = UIColor.systemGray.withAlphaComponent(1.0)
+        layer.cornerRadius = 12
+        layer.masksToBounds = true
+    }
+
+    private func setupLayout() {
         // Definindo as dimensões do card
         NSLayoutConstraint.activate([
             self.widthAnchor.constraint(equalToConstant: 190),
             self.heightAnchor.constraint(equalToConstant: 68)
         ])
         
-        // Cores do card com cores do sistema
-        backgroundColor = UIColor.systemGray.withAlphaComponent(1.0)
-        layer.cornerRadius = 12
-        layer.masksToBounds = true
-
         // Configurando o ícone
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         iconImageView.tintColor = .systemYellow
@@ -42,7 +49,7 @@ class CardView: UIView {
 
         // Configurando o texto
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        titleLabel.textColor = .white 
+        titleLabel.textColor = .white
         titleLabel.numberOfLines = 2
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

@@ -6,7 +6,7 @@
 //
 import UIKit
 
-enum StaticQrCodeType: CaseIterable, QrCodeTypeProtocol {
+enum StaticQRCodeType: CaseIterable, QRCodeTypeProtocol {
     case text
     case website
     case sms
