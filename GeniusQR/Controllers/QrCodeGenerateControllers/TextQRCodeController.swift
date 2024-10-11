@@ -19,12 +19,16 @@ class TextQRCodeController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupNavigationBar()
-        textField.becomeFirstResponder() // Abre o teclado automaticamente quando carrega a view
+        
+        // Abre o teclado automaticamente quando carrega a view
+        textField.becomeFirstResponder()
     }
 
     // MARK: - UI CONFIGURATION
     private func setupUI() {
-        view.backgroundColor = UIColor(white: 0.89, alpha: 1) // Cor de fundo off-white
+        
+        // Cor de fundo off-white
+        view.backgroundColor = UIColor(white: 0.89, alpha: 1)
 
         // Adicionando o campo de texto diretamente à view
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -86,8 +90,8 @@ extension TextQRCodeController: UITextFieldDelegate {
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-
-        addButton.isEnabled = !updatedText.isEmpty // Habilita o botão apenas se o campo não estiver vazio
+        // Habilita o botão apenas se o campo não estiver vazio
+        addButton.isEnabled = !updatedText.isEmpty
         return true
     }
 }

@@ -10,8 +10,8 @@ import UIKit
 class UrlQRCodeController: UIViewController {
     
     private let stackView = UIStackView()
-    private let titleTextField = UITextField() // Campo de título
-    private let urlTextField = UITextField() // Campo de URL
+    private let titleTextField = UITextField()
+    private let urlTextField = UITextField()
     private let addButton = UIBarButtonItem()
     private let cancelButton = UIBarButtonItem()
 
@@ -20,28 +20,32 @@ class UrlQRCodeController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupNavigationBar()
-        titleTextField.becomeFirstResponder() // Abre o teclado automaticamente no campo de título
+        
+        // Abre o teclado automaticamente no campo de título
+        titleTextField.becomeFirstResponder()
     }
 
     // MARK: - UI CONFIGURATION
     private func setupUI() {
-        view.backgroundColor = UIColor(white: 0.89, alpha: 1) // Cor de fundo off-white
+        
+        // Cor de fundo off-white
+        view.backgroundColor = UIColor(white: 0.89, alpha: 1)
 
-        // Configurando o stackView
+        // StackView
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
+
         
-        // Configurando o campo de título
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
         titleTextField.borderStyle = .roundedRect
         titleTextField.placeholder = "Título"
         titleTextField.layer.cornerRadius = 10
         titleTextField.layer.masksToBounds = true
         stackView.addArrangedSubview(titleTextField)
+
         
-        // Configurando o campo de URL
         urlTextField.translatesAutoresizingMaskIntoConstraints = false
         urlTextField.borderStyle = .roundedRect
         urlTextField.placeholder = "URL(deve iniciar com http:// ou https://)"
@@ -50,7 +54,7 @@ class UrlQRCodeController: UIViewController {
         urlTextField.layer.masksToBounds = true
         stackView.addArrangedSubview(urlTextField)
 
-        // Definindo as constraints do stackView
+        // Constraints da stackView
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -81,6 +85,8 @@ class UrlQRCodeController: UIViewController {
     // MARK: - ACTIONS
     @objc private func addButtonTapped() {
         guard let url = urlTextField.text, !url.isEmpty else { return }
+        
+        //Validações
         guard url.hasPrefix("http://") || url.hasPrefix("https://") else {
             showAlert("URL Inválido", "O link deve começar com http:// ou https://")
             return
@@ -103,7 +109,7 @@ class UrlQRCodeController: UIViewController {
     }
 }
 
-// MARK: - UITextFieldDelegate
+// MARK: - UITextFieldDelegate - Hacking with swift
 extension UrlQRCodeController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // Atualiza o botão "Adicionar" com base no texto
@@ -114,7 +120,8 @@ extension UrlQRCodeController: UITextFieldDelegate {
         // Se o usuário está apagando (string é vazia), habilita o botão se o texto não estiver vazio
         if string.isEmpty {
             addButton.isEnabled = !updatedText.isEmpty
-            return true // Permite a remoção
+            // Permite a remoção
+            return true
         }
 
         // Se não estiver apagando, altera a primeira letra para minúscula
@@ -126,6 +133,7 @@ extension UrlQRCodeController: UITextFieldDelegate {
         textField.text = String(modifiedText)
         addButton.isEnabled = !modifiedText.isEmpty
         
-        return false // Impede que o texto original seja adicionado
+        // Impede que o texto original seja adicionado
+        return false
     }
 }

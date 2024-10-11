@@ -12,7 +12,7 @@ class SmsQRCodePreviewController: QRCodePreviewController {
     // Variável para armazenar os dados do SMS
     private var smsData: String?
     
-    // Método para configurar o controller com os dados do SMS
+    // Método para configurar a controller com os dados do SMS
     func configure(with smsData: String) {
         self.smsData = smsData
         self.cardTitle = "SMS"
@@ -21,7 +21,7 @@ class SmsQRCodePreviewController: QRCodePreviewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Chamada do método configure
+        // Chamada do método que configura o qr code baseado no tipo do qr e conecta no base
         qrCodeCardView.configure(with: cardTitle ?? "", qrCodeImage: generateQRCode(from: smsData ?? ""), qrCodeTypeIcon: qrCodeType?.icon)
     }
 }

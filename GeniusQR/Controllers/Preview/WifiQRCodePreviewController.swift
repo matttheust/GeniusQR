@@ -12,6 +12,8 @@ class WifiQRCodePreviewController: QRCodePreviewController {
     // Configura o preview com as informações da rede WiFi
     func configure(ssid: String, securityType: String, password: String?) {
         // Converte "Aberta" para "nopass" para compatibilidade
+        // 'passwordString' será vazia se não houver senha definida ou se o tipo de segurança permitir acesso sem senha.
+
         let securityType = securityType == "Aberta" ? "nopass" : securityType
         let passwordString = securityType == "nopass" ? "" : (password ?? "")
         
@@ -27,7 +29,7 @@ class WifiQRCodePreviewController: QRCodePreviewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Chamada do método configure passando o ícone corretamente
+        // Chamada do método que configura o qr code baseado no tipo do qr e conecta no base
         if let qrCodeType = qrCodeType {
             qrCodeCardView.configure(with: cardTitle ?? "", qrCodeImage: generateQRCode(from: qrCodeText ?? ""), qrCodeTypeIcon: qrCodeType.icon)
         }

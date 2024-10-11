@@ -17,7 +17,7 @@ class TextQRCodePreviewController: QRCodePreviewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Chamada do método configure
+        // Chamada do método que configura o qr code baseado no tipo do qr e conecta no base
         qrCodeCardView.configure(with: cardTitle ?? "", qrCodeImage: generateQRCode(from: qrCodeText ?? ""), qrCodeTypeIcon: qrCodeType?.icon)
     }
 }

@@ -28,6 +28,8 @@ class WifiQRCodeController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupNavigationBar()
+        
+        // Abre o teclado automaticamente quando carrega a view
         ssidTextField.becomeFirstResponder()
     }
     
@@ -35,7 +37,7 @@ class WifiQRCodeController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .systemGroupedBackground
         
-        // Stack View
+        // stackView
         stackView.axis = .vertical
         stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +52,7 @@ class WifiQRCodeController: UIViewController {
         
         stackView.addArrangedSubview(securityView)
         
-        // Label Tipo de Segurança
+        // Label - Tipo de Segurança
         securityLabel.text = "Tipo de Segurança"
         securityLabel.font = .systemFont(ofSize: 17)
         securityLabel.textColor = .label
@@ -100,7 +102,7 @@ class WifiQRCodeController: UIViewController {
             // Security View Constraints
             securityView.heightAnchor.constraint(equalToConstant: 44),
             
-            // Label Tipo de Segurança
+            // Label - Tipo de Segurança
             securityLabel.centerYAnchor.constraint(equalTo: securityView.centerYAnchor),
             securityLabel.leadingAnchor.constraint(equalTo: securityView.leadingAnchor, constant: 8),
             
@@ -130,7 +132,7 @@ class WifiQRCodeController: UIViewController {
         navigationItem.leftBarButtonItem = cancelButton
     }
     
-    // MARK: - Helpers
+    // MARK: - Definições
     private func createEncryptionMenu() -> UIMenu {
         return UIMenu(title: "", children: encryptionOptions.map { option in
             UIAction(title: option, state: option == selectedEncryption ? .on : .off, handler: { _ in
