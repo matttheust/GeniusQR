@@ -25,41 +25,41 @@ class QRCodePreviewCard: UIView {
     }
     
     private func setupUI() {
-        // Configure a imagem de fundo
+        // Configura a imagem de fundo
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         backgroundImageView.image = UIImage(named: "cardBackground")
         backgroundImageView.contentMode = .scaleAspectFill
         addSubview(backgroundImageView)
         
-        // Configure o titleLabel
+        // titleLabel
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = .systemFont(ofSize: 36, weight: .bold)
         titleLabel.textColor = .white // Cor do texto
         addSubview(titleLabel)
         
-        // Configure o qrCodeImageView
+        // QR CODE
         qrCodeImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(qrCodeImageView)
         
-        // Configure o qrCodeTypeIconImageView
+        // Configura o icone que define o QR CODE
         qrCodeTypeIconImageView.translatesAutoresizingMaskIntoConstraints = false
-        qrCodeTypeIconImageView.tintColor = .white // Definindo a cor do ícone como branca
+        qrCodeTypeIconImageView.tintColor = .white
         addSubview(qrCodeTypeIconImageView)
 
         // Constraints
         NSLayoutConstraint.activate([
-            // Background ImageView
+            // Background
             backgroundImageView.topAnchor.constraint(equalTo: topAnchor),
             backgroundImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            // Title Label Constraints
+            // Title Label
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
-            // QR Code Image View Constraints
+            // QR Code
             qrCodeImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             qrCodeImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 30),
             qrCodeImageView.widthAnchor.constraint(equalToConstant: 200),

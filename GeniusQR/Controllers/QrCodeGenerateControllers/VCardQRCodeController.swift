@@ -10,8 +10,8 @@ import UIKit
 class VCardQRCodeController: UIViewController, UITextFieldDelegate {
 
     // MARK: - UI Elements
-    private let scrollView = UIScrollView() // Adiciona um scrollView
-    private let contentView = UIView() // Adiciona uma view para o conteúdo
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     private let stackView = UIStackView()
     private let firstNameTextField = UITextField()
     private let lastNameTextField = UITextField()
@@ -34,28 +34,32 @@ class VCardQRCodeController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         setupUI()
         setupNavigationBar()
-        checkIfFieldsAreFilled() // Verifica se os campos estão preenchidos
+        
+        // Verifica se os campos estão preenchidos
+        checkIfFieldsAreFilled()
     }
 
     // MARK: - UI CONFIGURATION
     private func setupUI() {
-        view.backgroundColor = UIColor(white: 0.89, alpha: 1) // Cor de fundo off-white
+        
+        // Cor de fundo off-white
+        view.backgroundColor = UIColor(white: 0.89, alpha: 1)
 
-        // Configurações do scrollView
+        // scrollView
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
 
-        // Configurações do contentView
+        // contentView
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
 
-        // Configurações do stackView
+        // stackView
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(stackView)
 
-        // Adiciona os campos de texto ao stackView com apenas placeholders
+        // Tupla para placeholders
         let textFields: [(String, UITextField)] = [
             ("Digite seu primeiro nome", firstNameTextField),
             ("Digite seu sobrenome", lastNameTextField),
@@ -73,14 +77,19 @@ class VCardQRCodeController: UIViewController, UITextFieldDelegate {
         ]
 
         for (placeholder, textField) in textFields {
-            textField.placeholder = placeholder // Placeholder para todos os campos
+            
+            //define os placeholders
+            textField.placeholder = placeholder
             textField.borderStyle = .roundedRect
-            textField.delegate = self // Define o delegate
+            
+            //A propria classe vai lidar com eventos de edição
+            textField.delegate = self
             textField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
-            stackView.addArrangedSubview(textField) // Adiciona apenas o textField ao stackView
+            
+            stackView.addArrangedSubview(textField)
         }
 
-        // Define as constraints do scrollView e contentView
+        // constraints da scrollView e contentView
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -91,17 +100,17 @@ class VCardQRCodeController: UIViewController, UITextFieldDelegate {
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor), // Garante que a largura do contentView é igual à do scrollView
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20) // Adiciona um espaço embaixo do stackView
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
 
     private func setupNavigationBar() {
-        navigationItem.title = "QR Code vCard"
+        navigationItem.title = "Novo QR Code - vCard"
 
         // Botão "Adicionar" - inicialmente desabilitado
         addButton.title = "Adicionar"
@@ -140,7 +149,10 @@ class VCardQRCodeController: UIViewController, UITextFieldDelegate {
         let fullName = "\(firstNameTextField.text ?? "") \(lastNameTextField.text ?? "")"
         
         let previewVC = VCardQRCodePreviewController()
-        previewVC.configure(with: vCardString, title: fullName) // Passa o título junto com a string vCard
+        
+        // Passa o título junto com a string vCard
+        previewVC.configure(with: vCardString, title: fullName)
+        
         navigationController?.pushViewController(previewVC, animated: true)
     }
 
@@ -149,7 +161,7 @@ class VCardQRCodeController: UIViewController, UITextFieldDelegate {
     }
 
     @objc private func textFieldChanged() {
-        checkIfFieldsAreFilled() // Verifica se todos os campos estão preenchidos
+        checkIfFieldsAreFilled()
     }
 
     private func checkIfFieldsAreFilled() {
@@ -167,6 +179,6 @@ class VCardQRCodeController: UIViewController, UITextFieldDelegate {
                               !stateTextField.text!.isEmpty &&
                               !countryTextField.text!.isEmpty &&
                               !websiteTextField.text!.isEmpty
-        addButton.isEnabled = allFieldsFilled // Habilita ou desabilita o botão "Adicionar"
+        addButton.isEnabled = allFieldsFilled // Habilita e/ou desabilita o botão "Adicionar"
     }
 }

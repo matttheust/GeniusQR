@@ -5,6 +5,7 @@
 //  Created by Matheus  Torres on 26/09/24.
 //
 
+
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -21,6 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
     }
     
+    
+    //Aula tab bar 
     func createRoot() -> UIViewController {
         
         //Controllers

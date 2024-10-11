@@ -20,12 +20,16 @@ class SmsQRCodeController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupNavigationBar()
-        phoneNumberTextField.becomeFirstResponder() // Abre o teclado automaticamente quando carrega a view
+        
+        // Abre o teclado automaticamente quando carrega a view
+        phoneNumberTextField.becomeFirstResponder()
     }
 
     // MARK: - UI CONFIGURATION
     private func setupUI() {
-        view.backgroundColor = UIColor(white: 0.89, alpha: 1) // Cor de fundo off-white
+        
+        // Cor de fundo off-white
+        view.backgroundColor = UIColor(white: 0.89, alpha: 1)
 
         // StackView para organizar os campos
         stackView.axis = .vertical
@@ -33,19 +37,19 @@ class SmsQRCodeController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
 
-        // Adicionando o campo de texto do número de telefone
+        
         phoneNumberTextField.borderStyle = .roundedRect
-        phoneNumberTextField.placeholder = "Ex: +55 11 91234-5678" // Placeholder mais descritivo
+        phoneNumberTextField.placeholder = "Ex: +55 11 91234-5678"
         phoneNumberTextField.delegate = self
         stackView.addArrangedSubview(phoneNumberTextField)
 
-        // Adicionando o campo de texto da mensagem
+        
         messageTextField.borderStyle = .roundedRect
         messageTextField.placeholder = "Digite a mensagem"
         messageTextField.delegate = self
         stackView.addArrangedSubview(messageTextField)
 
-        // Definindo as constraints do stackView
+        // Constraints da stackView
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -97,8 +101,8 @@ extension SmsQRCodeController: UITextFieldDelegate {
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-
-        addButton.isEnabled = !updatedText.isEmpty // Habilita o botão apenas se o campo não estiver vazio
+        // Habilita o botão apenas se o campo não estiver vazio
+        addButton.isEnabled = !updatedText.isEmpty
         return true
     }
 }

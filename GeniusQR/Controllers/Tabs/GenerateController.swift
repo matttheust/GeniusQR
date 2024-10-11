@@ -111,16 +111,19 @@ class GenerateController: UIViewController {
     // MARK: - ACTIONS
     @objc func cardTapped(_ sender: UITapGestureRecognizer) {
         guard let card = sender.view as? QRCodeSelectorView,
-              let qrType = card.qrCodeType else { return } // Obtenha o tipo do card
+              
+              // Obtenha o tipo do card
+              let qrType = card.qrCodeType else { return }
         
-        // Feedback visual ao tocar
-        UIView.animate(withDuration: 0.2,
-                       animations: {
-            card.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        }) { _ in
-            UIView.animate(withDuration: 0.2) {
-                card.transform = .identity // Retorna ao tamanho original
-            }
+            // Feedback visual ao tocar
+            UIView.animate(withDuration: 0.2,
+                           animations: {
+                card.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+            }) { _ in
+                UIView.animate(withDuration: 0.2) {
+                    // Retorna ao tamanho original
+                    card.transform = .identity
+                }
             
             // Navegando para a próxima tela após a animação
             let presentationVC: UIViewController
