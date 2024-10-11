@@ -1,8 +1,8 @@
 //
-//  CardView.swift
+//  QRCodeSelectorView.swift
 //  GeniusQR
 //
-//  Created by Matheus  Torres on 27/09/24.
+//  Created by Matheus Torres on 27/09/24.
 //
 
 import UIKit
@@ -30,11 +30,25 @@ class QRCodeSelectorView: UIView {
     
 
     private func setupCard() {
+        setupAppearance()
+        setupLayout()
+    }
+    
+    private func setupAppearance() {
+        // Definindo as cores e bordas do card
         backgroundColor = UIColor.systemGray.withAlphaComponent(1.0)
         layer.cornerRadius = 12
         layer.masksToBounds = true
+    }
 
-        // Configura o ícone
+    private func setupLayout() {
+        // Definindo as dimensões do card
+        NSLayoutConstraint.activate([
+            self.widthAnchor.constraint(equalToConstant: 190),
+            self.heightAnchor.constraint(equalToConstant: 68)
+        ])
+        
+        // Configurando o ícone
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         iconImageView.tintColor = .systemYellow
         addSubview(iconImageView)
