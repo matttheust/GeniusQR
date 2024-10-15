@@ -2,7 +2,6 @@
 //  ViewController.swift
 //  GeniusQR
 //
-//  Created by Matheus  Torres on 26/09/24.
 //
 
 import UIKit

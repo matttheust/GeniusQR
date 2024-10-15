@@ -32,6 +32,9 @@ class QRCodePreviewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .systemBackground
         
+        qrCodeCardView.titleLabel.numberOfLines = 2 // Permitir múltiplas linhas
+            
+        
         qrCodeCardView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(qrCodeCardView)
         

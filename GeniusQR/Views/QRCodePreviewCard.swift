@@ -10,7 +10,7 @@ import UIKit
 class QRCodePreviewCard: UIView {
     
     private let backgroundImageView = UIImageView()
-    private let titleLabel = UILabel()
+    public let titleLabel = UILabel()
     let qrCodeImageView = UIImageView()
     private let qrCodeTypeIconImageView = UIImageView()
 

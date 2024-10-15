@@ -9,19 +9,43 @@ import UIKit
 
 class SmsQRCodePreviewController: QRCodePreviewController {
     
-    // Variável para armazenar os dados do SMS
     private var smsData: String?
     
-    // Método para configurar a controller com os dados do SMS
     func configure(with smsData: String) {
         self.smsData = smsData
-        self.cardTitle = "SMS"
+        let components = smsData.split(separator: ":").map(String.init) // Exemplo: "1234567890:Mensagem"
+        
+        if let number = components.first {
+            self.cardTitle = "SMS - \(number)" // Formatação do título
+        } else {
+            self.cardTitle = "SMS" // Caso não tenha número
+        }
+        
         self.qrCodeType = .sms
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Chamada do método que configura o qr code baseado no tipo do qr e conecta no base
-        qrCodeCardView.configure(with: cardTitle ?? "", qrCodeImage: generateQRCode(from: smsData ?? ""), qrCodeTypeIcon: qrCodeType?.icon)
+        let qrCodeImage = generateQRCode(from: smsData ?? "")
+        qrCodeCardView.configure(with: cardTitle ?? "", qrCodeImage: qrCodeImage, qrCodeTypeIcon: qrCodeType?.icon)
+
+        // Salvar QR Code gerado com o título
+        if let image = qrCodeImage, let title = cardTitle {
+            saveQRCode(image: image, title: title) // Salvar usando o título
+        }
+    }
+    
+    private func saveQRCode(image: UIImage, title: String) {
+        guard let data = image.pngData() else { return }
+        let fileManager = FileManager.default
+        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileURL = documentsDirectory.appendingPathComponent("\(title).png") // Usar o título como nome do arquivo
+
+        do {
+            try data.write(to: fileURL)
+            print("QR Code salvo em: \(fileURL)")
+        } catch {
+            print("Erro ao salvar QR Code: \(error)")
+        }
     }
 }
