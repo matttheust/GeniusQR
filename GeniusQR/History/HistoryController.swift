@@ -9,7 +9,7 @@ import UIKit
 
 class HistoryController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var qrCodes: [(image: UIImage, title: String)] = [] // Armazenando imagens e títulos
+    var qrCodes: [(image: UIImage, title: String, type: StaticQRCodeType)] = [] // Armazenando imagens, títulos e tipos
     var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -57,7 +57,23 @@ class HistoryController: UIViewController, UITableViewDelegate, UITableViewDataS
             for fileURL in fileURLs {
                 if let image = UIImage(contentsOfFile: fileURL.path) {
                     let title = fileURL.deletingPathExtension().lastPathComponent // Pega o nome do arquivo sem a extensão
-                    qrCodes.append((image: image, title: title))
+                    
+                    // Aqui você deve determinar o tipo do QR code
+                    var type: StaticQRCodeType = .text // Default
+                    if title.lowercased().contains("sms") {
+                        type = .sms // Define o tipo como SMS
+                    } else if title.lowercased().contains("website") {
+                        type = .website
+                    } else if title.lowercased().contains("vcard") {
+                        type = .vcard
+                    } else if title.lowercased().contains("wifi") {
+                        type = .wifi
+                    }
+                    
+                    // Debug: imprimir tipo e título
+                    print("Adicionando QR Code - Título: \(title), Tipo: \(type)")
+                    
+                    qrCodes.append((image: image, title: title, type: type))
                 }
             }
             tableView.reloadData()  // Atualizar a tabela com os QR codes
@@ -76,7 +92,9 @@ class HistoryController: UIViewController, UITableViewDelegate, UITableViewDataS
             return UITableViewCell()
         }
         let qrCode = qrCodes[indexPath.row]
-        cell.configure(with: qrCode.image, title: qrCode.title)
+        let icon = qrCode.type.icon // Obtenha o ícone correspondente ao tipo
+        print("Configurando célula - Título: \(qrCode.title), Ícone: \(String(describing: icon))") // Debug
+        cell.configure(with: qrCode.title, icon: icon) // Passa apenas o título e o ícone
         return cell
     }
     
@@ -92,12 +110,9 @@ class HistoryController: UIViewController, UITableViewDelegate, UITableViewDataS
     // Implementando swipe para deletar
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Remove o QR code da lista e do diretório
             let titleToDelete = qrCodes[indexPath.row].title
             qrCodes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            // Deletar o arquivo do diretório
             deleteQRCodeFile(named: titleToDelete)
         }
     }
@@ -105,10 +120,10 @@ class HistoryController: UIViewController, UITableViewDelegate, UITableViewDataS
     private func deleteQRCodeFile(named title: String) {
         let fileManager = FileManager.default
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let fileURL = documentsDirectory.appendingPathComponent("\(title).png") // Construindo o caminho do arquivo
+        let fileURL = documentsDirectory.appendingPathComponent("\(title).png")
 
         do {
-            try fileManager.removeItem(at: fileURL) // Tentando remover o arquivo
+            try fileManager.removeItem(at: fileURL)
             print("QR Code deletado: \(fileURL)")
         } catch {
             print("Erro ao deletar QR Code: \(error)")

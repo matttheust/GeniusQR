@@ -11,7 +11,7 @@ class QRCodeTableViewCell: UITableViewCell {
     
     static let identifier = "QRCodeTableViewCell"
     
-    let qrCodeImageView = UIImageView()
+    let typeIconImageView = UIImageView() // Apenas o ícone do tipo
     let titleLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -24,26 +24,30 @@ class QRCodeTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        qrCodeImageView.translatesAutoresizingMaskIntoConstraints = false
+        typeIconImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(qrCodeImageView)
+        // Configurar titleLabel para permitir múltiplas linhas
+        titleLabel.numberOfLines = 0 // Permite que o label tenha múltiplas linhas
+        titleLabel.lineBreakMode = .byWordWrapping // Quebrar a linha por palavras
+
+        contentView.addSubview(typeIconImageView) // Adicionando o ícone à célula
         contentView.addSubview(titleLabel)
 
         NSLayoutConstraint.activate([
-            qrCodeImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            qrCodeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            qrCodeImageView.widthAnchor.constraint(equalToConstant: 50),
-            qrCodeImageView.heightAnchor.constraint(equalToConstant: 50),
-            
+            typeIconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            typeIconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            typeIconImageView.widthAnchor.constraint(equalToConstant: 30),
+            typeIconImageView.heightAnchor.constraint(equalToConstant: 30),
+
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: qrCodeImageView.trailingAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: typeIconImageView.trailingAnchor, constant: 8),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])
     }
 
-    func configure(with image: UIImage, title: String) {
-        qrCodeImageView.image = image
+    func configure(with title: String, icon: UIImage?) {
         titleLabel.text = title
+        typeIconImageView.image = icon // Configura o ícone do tipo
     }
 }
