@@ -28,10 +28,16 @@ class SmsQRCodePreviewController: QRCodePreviewController {
         let qrCodeImage = generateQRCode(from: smsData ?? "")
         qrCodeCardView.configure(with: cardTitle ?? "", qrCodeImage: qrCodeImage, qrCodeTypeIcon: qrCodeType?.icon)
 
-        // Salvar QR Code gerado com o título
-        if let image = qrCodeImage, let components = smsData?.split(separator: ":").map(String.init), let number = components.first {
-            let formattedNumber = number.trimmingCharacters(in: .whitespaces) // Remove espaços, se houver
-            let filename = "\(formattedNumber).png" // Nome do arquivo ajustado para incluir apenas o número
+        if let image = qrCodeImage, let components = smsData?.split(separator: ":").map(String.init), components.count > 1 {
+            // Captura a parte que contém o número de telefone
+            let phoneAndBody = components[1].trimmingCharacters(in: .whitespaces) // Ex: "+55 11 123123123&body=123123123123"
+
+            // Divide para capturar apenas o número, removendo a parte do corpo
+            let phoneNumberComponents = phoneAndBody.split(separator: "&").map(String.init)
+            let formattedNumber = phoneNumberComponents[0].trimmingCharacters(in: .whitespaces) // Ex: "+55 11 123123123"
+            
+            // Gera o nome do arquivo, mantendo o '+'
+            let filename = "sms_\(formattedNumber).png" // Nome do arquivo ajustado
             saveQRCode(image: image, title: filename) // Salvar usando o nome correto
         }
     }
