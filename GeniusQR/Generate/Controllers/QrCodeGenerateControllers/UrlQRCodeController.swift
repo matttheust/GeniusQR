@@ -40,7 +40,7 @@ class UrlQRCodeController: UIViewController {
         
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
         titleTextField.borderStyle = .roundedRect
-        titleTextField.placeholder = "Título"
+        titleTextField.placeholder = "Ex: Google.com"
         titleTextField.layer.cornerRadius = 10
         titleTextField.layer.masksToBounds = true
         stackView.addArrangedSubview(titleTextField)
@@ -63,7 +63,7 @@ class UrlQRCodeController: UIViewController {
     }
 
     private func setupNavigationBar() {
-        navigationItem.title = "Novo QR Code - URL"
+        navigationItem.title = "Novo QR Code - Website"
 
         // Botão "Adicionar" - inicialmente desabilitado
         addButton.title = "Adicionar"
@@ -86,14 +86,14 @@ class UrlQRCodeController: UIViewController {
     @objc private func addButtonTapped() {
         guard let url = urlTextField.text, !url.isEmpty else { return }
         
-        //Validações
+        // Validações
         guard url.hasPrefix("http://") || url.hasPrefix("https://") else {
             showAlert("URL Inválido", "O link deve começar com http:// ou https://")
             return
         }
         
         let previewVC = UrlQRCodePreviewController()
-        previewVC.configure(with: titleTextField.text ?? "", url: url)
+        previewVC.configure(with: url) 
         
         navigationController?.pushViewController(previewVC, animated: true)
     }

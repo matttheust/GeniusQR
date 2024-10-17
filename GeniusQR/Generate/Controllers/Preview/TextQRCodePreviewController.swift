@@ -23,7 +23,9 @@ class TextQRCodePreviewController: QRCodePreviewController {
         
         // Salvar QR Code gerado com o título do usuário
         if let image = qrCodeImage, let title = cardTitle {
-            saveQRCode(image: image, title: title) // Salvar com título ao invés de nome de arquivo
+            // Formatar o nome do arquivo seguindo o padrão
+            let filename = "text_\(title.replacingOccurrences(of: " ", with: "_"))" // Substitui espaços por underscores
+            saveQRCode(image: image, title: "\(filename).png") // Salvar com o padrão de nomenclatura
         }
     }
     
@@ -31,7 +33,7 @@ class TextQRCodePreviewController: QRCodePreviewController {
         guard let data = image.pngData() else { return }
         let fileManager = FileManager.default
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let fileURL = documentsDirectory.appendingPathComponent("\(title).png") // Usar o título como nome do arquivo
+        let fileURL = documentsDirectory.appendingPathComponent(title) // Usar o título como nome do arquivo
 
         do {
             try data.write(to: fileURL)

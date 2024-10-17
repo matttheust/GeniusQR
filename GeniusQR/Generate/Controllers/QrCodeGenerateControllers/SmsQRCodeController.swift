@@ -81,31 +81,14 @@ class SmsQRCodeController: UIViewController {
             return
         }
         
-        // Extraindo DDD e número do telefone
-        let formattedNumber = formatPhoneNumber(phoneNumber)
         let smsData = "sms:\(phoneNumber)&body=\(message)"
         let previewVC = SmsQRCodePreviewController()
         previewVC.configure(with: smsData)
         
-        // Atualizar o título para "SMS - {DDD e número}"
-        previewVC.cardTitle = "SMS - \(formattedNumber)"
+        // Atualizar o título para "SMS {número}"
+        previewVC.cardTitle = "SMS \(phoneNumber)" // O título é configurado corretamente
         
         navigationController?.pushViewController(previewVC, animated: true)
-    }
-
-    private func formatPhoneNumber(_ phoneNumber: String) -> String {
-        // Supondo que o número esteja no formato "+55 11 91234-5678"
-        // Removendo o código do país
-        let components = phoneNumber.split(separator: " ")
-        
-        // A primeira parte é o código do país, a segunda parte é o DDD e o restante é o número
-        if components.count > 2 {
-            let ddd = components[1] // DDD
-            let number = components[2...] // O restante é o número
-            return "\(ddd) \(number.joined(separator: " "))" // Formata como "DDD número"
-        }
-        
-        return phoneNumber // Retornar como está se o formato for inesperado
     }
 
     private func isValidPhoneNumber(_ phoneNumber: String) -> Bool {

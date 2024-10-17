@@ -60,14 +60,16 @@ class HistoryController: UIViewController, UITableViewDelegate, UITableViewDataS
                     
                     // Aqui você deve determinar o tipo do QR code
                     var type: StaticQRCodeType = .text // Default
-                    if title.lowercased().contains("sms") {
-                        type = .sms // Define o tipo como SMS
-                    } else if title.lowercased().contains("website") {
-                        type = .website
-                    } else if title.lowercased().contains("vcard") {
-                        type = .vcard
-                    } else if title.lowercased().contains("wifi") {
-                        type = .wifi
+                    let titleLowercased = title.lowercased() // Convertendo o título para minúsculas para comparação
+                    
+                    if titleLowercased.starts(with: "website_") {
+                        type = .website // Define como Website
+                    } else if titleLowercased.starts(with: "sms_") {
+                        type = .sms // Define como SMS
+                    } else if titleLowercased.starts(with: "vcard_") {
+                        type = .vcard // Define como vCard
+                    } else if titleLowercased.starts(with: "wifi_") {
+                        type = .wifi // Define como Wifi
                     }
                     
                     // Debug: imprimir tipo e título
@@ -91,10 +93,12 @@ class HistoryController: UIViewController, UITableViewDelegate, UITableViewDataS
         guard let cell = tableView.dequeueReusableCell(withIdentifier: QRCodeTableViewCell.identifier, for: indexPath) as? QRCodeTableViewCell else {
             return UITableViewCell()
         }
+        
         let qrCode = qrCodes[indexPath.row]
         let icon = qrCode.type.icon // Obtenha o ícone correspondente ao tipo
-        print("Configurando célula - Título: \(qrCode.title), Ícone: \(String(describing: icon))") // Debug
-        cell.configure(with: qrCode.title, icon: icon) // Passa apenas o título e o ícone
+        
+        print("Configurando célula - Título: \(qrCode.title), Tipo: \(qrCode.type), Ícone: \(String(describing: icon))") // Debug
+        cell.configure(with: qrCode.title, icon: icon) // Passa o título original e o ícone
         return cell
     }
     

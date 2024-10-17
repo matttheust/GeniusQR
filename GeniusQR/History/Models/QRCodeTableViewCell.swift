@@ -11,7 +11,7 @@ class QRCodeTableViewCell: UITableViewCell {
     
     static let identifier = "QRCodeTableViewCell"
     
-    let typeIconImageView = UIImageView() // Apenas o ícone do tipo
+    let typeIconImageView = UIImageView() // Ícone do tipo
     let titleLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -27,10 +27,10 @@ class QRCodeTableViewCell: UITableViewCell {
         typeIconImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        // Configurar titleLabel para permitir múltiplas linhas
-        titleLabel.numberOfLines = 0 // Permite que o label tenha múltiplas linhas
-        titleLabel.lineBreakMode = .byWordWrapping // Quebrar a linha por palavras
-
+        // Configurar titleLabel para permitir apenas uma linha
+        titleLabel.numberOfLines = 1 // Apenas uma linha
+        titleLabel.lineBreakMode = .byTruncatingTail // Adiciona "..." se não couber
+        
         contentView.addSubview(typeIconImageView) // Adicionando o ícone à célula
         contentView.addSubview(titleLabel)
 
@@ -47,7 +47,16 @@ class QRCodeTableViewCell: UITableViewCell {
     }
 
     func configure(with title: String, icon: UIImage?) {
-        titleLabel.text = title
+        // Extraindo apenas a parte do título após o primeiro underscore
+        let components = title.split(separator: "_").map(String.init)
+        
+        // Formata o título apenas com a parte que vem após o primeiro underscore
+        if components.count > 1 {
+            titleLabel.text = components.dropFirst().joined(separator: " ") // Mantém tudo após o primeiro "_"
+        } else {
+            titleLabel.text = title // Se não houver underscore, usa o título completo
+        }
+
         typeIconImageView.image = icon // Configura o ícone do tipo
     }
 }
